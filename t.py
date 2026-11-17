@@ -72,7 +72,7 @@ with open('src/data/characters.json') as f:
         # find groups of non-unique characters, print group names + group params
         unique_chars = {}
         for character in characters:
-            key = (character['gender'], tuple(character['role']), character['height'], character['certified mojavebabe'], character['verv-whipped'], character['region'], character.get('profil', None))
+            key = (character['gender'], tuple(character['role']), character['height'], character['mystisk'], character['verv-whipped'], character['region'])
             if key not in unique_chars:
                 unique_chars[key] = []
             unique_chars[key].append(character['name'])

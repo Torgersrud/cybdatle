@@ -32,11 +32,12 @@ export const getThumbPath = (name: string): string => {
 //     return { target: characterData[index] as Character, dateKey };
 // };
 
-// Safely extracts a value from the character, checking for alternative hyphen/underscore spellings
+// Safely extracts a value from the character, checking for the alternative underscore spelling
+// of hyphenated keys (e.g. "verv-whipped" may appear as "verv_whipped" in the JSON)
 export const getFeatureValue = (char: Character, key: string) => {
     if (char[key] !== undefined) return char[key];
-    if (key === 'certified mojavebabe') return char['certified_mojavebabe'];
-    if (key === 'verv-whipped') return char['verv_whipped'];
+    const underscoreKey = key.replace(/-/g, '_');
+    if (underscoreKey !== key && char[underscoreKey] !== undefined) return char[underscoreKey];
     return undefined;
 };
 

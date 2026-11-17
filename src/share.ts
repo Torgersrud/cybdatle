@@ -19,14 +19,14 @@ const loadGuesses = (key: string): Character[] => {
     }
 };
 
-export const imageWonKey = (dateKey: string) => `komtekle-bilde-vunnet-${dateKey}`;
+export const imageWonKey = (dateKey: string) => `cybdatle-bilde-vunnet-${dateKey}`;
 
 // Classic result, or null if today's classic game isn't won
 const classicSection = (dateKey: string): string | null => {
     const target = getDailyClassicCharacter(dateKey);
     if (!target) return null;
 
-    const guesses = loadGuesses(`komtekle-${dateKey}`);
+    const guesses = loadGuesses(`cybdatle-${dateKey}`);
     if (guesses.length === 0 || guesses[0].name !== target.name) return null;
 
     // Newest guess is first in state, reverse to show chronological order
@@ -53,7 +53,7 @@ const classicSection = (dateKey: string): string | null => {
 // Image mode result, or null if not won
 const imageSection = (dateKey: string): string | null => {
     if (localStorage.getItem(imageWonKey(dateKey)) !== '1') return null;
-    const guesses = loadGuesses(`komtekle-bilde-${dateKey}`);
+    const guesses = loadGuesses(`cybdatle-bilde-${dateKey}`);
     if (guesses.length === 0) return null;
 
     // Index 0 is winning guess, reverse so green square is at the end
@@ -66,5 +66,6 @@ export const buildShareText = (): string => {
     const dateKey = getTodayDateKey();
     const sections = [classicSection(dateKey), imageSection(dateKey)].filter(Boolean);
 
-    return `Komtekle - ${dateKey}\n\n${sections.join('\n\n')}\n\nhttps://komtekle.netlify.app`;
+    // URL is a placeholder pointing at the old komtekle site until our own hosting is decided
+    return `Cybdatle - ${dateKey}\n\n${sections.join('\n\n')}\n\nhttps://komtekle.netlify.app`;
 };

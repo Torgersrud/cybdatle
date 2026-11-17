@@ -20,12 +20,11 @@ export interface Character {
     gender: string;
     role: string | string[];
     height: string;
-    "certified mojavebabe"?: string;
-    certified_mojavebabe?: string;
     "verv-whipped"?: string;
     verv_whipped?: string;
     region: string;
-    profil: string;
+    /** Placeholder successor of "certified mojavebabe"; renamed by the joke pass */
+    mystisk?: string;
     dateAdded: string;
     [key: string]: any; // Allows for arbitrary new keys in JSON
 }

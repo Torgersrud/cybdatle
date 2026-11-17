@@ -1,6 +1,21 @@
+# Cybdatle
 
-# Komtekle
+The daily "guess who" game for the 2nd-year class, forked from [komtekle](https://github.com/perhenrikgithub/komtekle).
 
+## Fresh timeline (fork note)
+
+Upstream komtekle lived by a strict no-edit compatibility rule: roster entries were never
+renamed, deleted or back-dated, because every past day's puzzle had to stay reproducible.
+
+**That rule was deliberately reset at this fork** (see
+[ADR 0001](docs/adr/0001-fresh-timeline-at-fork.md)). Cybdatle declares a fresh timeline:
+
+- The entire roster was introduced on the launch date **2026-11-25**, so every entry carries
+  `dateAdded: 2026-11-25` — this is why the dates cluster on a single day.
+- Daily picks start on the same day (`PICK_HISTORY_START = 2026-11-25`). Days before launch
+  serve nothing ("Ingen tilgjengelige karakterer").
+- From launch day onward the old compatibility rule applies again: never back-date `dateAdded`,
+  and don't rename or reorder entries, so past puzzles stay stable.
 
 ## Feature Configuration
 

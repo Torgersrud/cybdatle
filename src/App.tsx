@@ -38,7 +38,7 @@ function App() {
       style={halloween ? { backgroundImage: 'radial-gradient(ellipse at top, rgba(249, 115, 22, 0.18), rgba(124, 58, 237, 0.12) 40%, transparent 70%)' } : undefined}
     >
       <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-wider text-white">
-        {halloween ? '🎃 Komtekle 🦇' : 'Komtekle'}
+        {halloween ? '🎃 Cybdatle 🦇' : 'Cybdatle'}
       </h1>
 
       <div className="flex gap-1 p-1 mb-4 bg-gray-800 rounded-full shadow-lg shadow-black/50">

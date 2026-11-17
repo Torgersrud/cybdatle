@@ -27,7 +27,7 @@ function ImageGame({ halloween }: { halloween: boolean }) {
   const focusX = seededRandom(`bilde-x-${dateKey}`) * 100;
   const focusY = seededRandom(`bilde-y-${dateKey}`) * 100;
 
-  const [guesses, setGuesses] = useDailyGuesses(`komtekle-bilde-${dateKey}`);
+  const [guesses, setGuesses] = useDailyGuesses(`cybdatle-bilde-${dateKey}`);
 
   const hasWon = target !== null && guesses.length > 0 && guesses[0].name === target.name;
 

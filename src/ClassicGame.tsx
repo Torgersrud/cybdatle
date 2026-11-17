@@ -23,7 +23,7 @@ function ClassicGame({ halloween }: { halloween: boolean }) {
   const dateKey = useMemo(() => getTodayDateKey(), []);
   const target = useMemo(() => getDailyClassicCharacter(dateKey), [dateKey]);
 
-  const [guesses, setGuesses] = useDailyGuesses(`komtekle-${dateKey}`);
+  const [guesses, setGuesses] = useDailyGuesses(`cybdatle-${dateKey}`);
 
   const hasWon = guesses.length > 0 && guesses[0].name === target?.name;
 

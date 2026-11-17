@@ -9,8 +9,11 @@ import { AVOID_N_LAST_CHARACTERS } from './gameConfig';
  * From this date on, picks avoid what was ACTUALLY served on the previous N days (chained forward).
  * Days before it use the legacy algorithm, because that is what players were really shown.
  * Don't change this date: moving it changes past and current picks.
+ *
+ * Cybdatle reset the timeline at the fork: launch day is the first day anything is served,
+ * and every roster entry carries this same dateAdded (see README "Fresh timeline").
  */
-export const PICK_HISTORY_START = '2026-10-23';
+export const PICK_HISTORY_START = '2026-11-25';
 
 interface DailyPicks {
     classic: Character | null;
@@ -105,7 +108,14 @@ function computePicks(dateKey: string): DailyPicks {
     // Image mode: only characters with a picture, never the same as today's classic target
     const recentImage = new Set(recent.flatMap((p) => (p.image ? [p.image.name] : [])));
     if (classic) recentImage.add(classic.name);
-    const image = pickFromPool(eligible.filter(hasImage), recentImage, `bilde-v2-${dateKey}`);
+    const withImages = eligible.filter(hasImage);
+    let image = pickFromPool(withImages, recentImage, `bilde-v2-${dateKey}`);
+    // When the avoid window excludes every picture the pool falls back to the full list and could
+    // land on today's classic target; serving the same answer in both modes is worse than a recent
+    // repeat, so fall back to anyone else who has a picture.
+    if (image && classic && image.name === classic.name) {
+        image = pickFromPool(withImages, new Set([classic.name]), `bilde-v2-${dateKey}`) ?? image;
+    }
 
     return { classic, image };
 }

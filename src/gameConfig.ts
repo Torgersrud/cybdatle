@@ -36,8 +36,8 @@ export const GAME_FEATURES: FeatureConfig[] = [
         mobileSpanClass: 'col-span-3'
     },
     {
-        key: 'certified mojavebabe',
-        label: 'Certified mojavebabe',
+        key: 'region',
+        label: 'Region',
         type: 'EXACT',
         widthClass: 'w-24'
     },
@@ -48,14 +48,10 @@ export const GAME_FEATURES: FeatureConfig[] = [
         widthClass: 'w-24'
     },
     {
-        key: 'region',
-        label: 'Region',
-        type: 'EXACT',
-        widthClass: 'w-24'
-    },
-    {
-        key: 'profil',
-        label: 'Profil',
+        // Placeholder successor of "Certified mojavebabe". The real column name is a
+        // pending class decision and will replace this label + key in the joke pass.
+        key: 'mystisk',
+        label: 'Mystisk kolonne',
         type: 'EXACT',
         widthClass: 'w-24'
     }
