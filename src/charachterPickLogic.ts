@@ -26,8 +26,17 @@ const imageFiles = new Set(characterImageFiles.map((f) => f.normalize('NFC')));
 export const hasImage = (c: Character): boolean =>
     imageFiles.has(getImagePath(c.name).split('/').pop()!.normalize('NFC'));
 
-/** Current UTC date in YYYY-MM-DD */
-export const getTodayDateKey = (): string => new Date().toISOString().slice(0, 10);
+/**
+ * Current UTC date in YYYY-MM-DD.
+ * Dev-only: `?date=YYYY-MM-DD` in the URL previews another day's puzzle (ignored in production).
+ */
+export const getTodayDateKey = (): string => {
+    if (import.meta.env.DEV && typeof window !== 'undefined') {
+        const override = new URLSearchParams(window.location.search).get('date');
+        if (override && /^\d{4}-\d{2}-\d{2}$/.test(override)) return override;
+    }
+    return new Date().toISOString().slice(0, 10);
+};
 
 /** Date key shifted by `days` (UTC) */
 export function addDays(dateKey: string, days: number): string {
