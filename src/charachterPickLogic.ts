@@ -114,7 +114,7 @@ function computePicks(dateKey: string): DailyPicks {
     // land on today's classic target; serving the same answer in both modes is worse than a recent
     // repeat, so fall back to anyone else who has a picture.
     if (image && classic && image.name === classic.name) {
-        image = pickFromPool(withImages, new Set([classic.name]), `bilde-v2-${dateKey}`) ?? image;
+        image = pickFromPool(withImages, new Set([classic.name]), `bilde-v2-${dateKey}`);
     }
 
     return { classic, image };

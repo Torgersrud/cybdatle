@@ -17,13 +17,13 @@ import {
 
 import SearchBox from './components/SearchBox';
 import WinCard from './components/WinCard';
-import { buildShareText } from './share';
+import { buildShareText, classicGuessesKey } from './share';
 
 function ClassicGame({ halloween }: { halloween: boolean }) {
   const dateKey = useMemo(() => getTodayDateKey(), []);
   const target = useMemo(() => getDailyClassicCharacter(dateKey), [dateKey]);
 
-  const [guesses, setGuesses] = useDailyGuesses(`cybdatle-${dateKey}`);
+  const [guesses, setGuesses] = useDailyGuesses(classicGuessesKey(dateKey));
 
   const hasWon = guesses.length > 0 && guesses[0].name === target?.name;
 

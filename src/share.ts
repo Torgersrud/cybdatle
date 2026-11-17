@@ -19,6 +19,9 @@ const loadGuesses = (key: string): Character[] => {
     }
 };
 
+// localStorage keys — single source so a rebrand touches one file
+export const classicGuessesKey = (dateKey: string) => `cybdatle-${dateKey}`;
+export const imageGuessesKey = (dateKey: string) => `cybdatle-bilde-${dateKey}`;
 export const imageWonKey = (dateKey: string) => `cybdatle-bilde-vunnet-${dateKey}`;
 
 // Classic result, or null if today's classic game isn't won
@@ -26,7 +29,7 @@ const classicSection = (dateKey: string): string | null => {
     const target = getDailyClassicCharacter(dateKey);
     if (!target) return null;
 
-    const guesses = loadGuesses(`cybdatle-${dateKey}`);
+    const guesses = loadGuesses(classicGuessesKey(dateKey));
     if (guesses.length === 0 || guesses[0].name !== target.name) return null;
 
     // Newest guess is first in state, reverse to show chronological order
@@ -53,7 +56,7 @@ const classicSection = (dateKey: string): string | null => {
 // Image mode result, or null if not won
 const imageSection = (dateKey: string): string | null => {
     if (localStorage.getItem(imageWonKey(dateKey)) !== '1') return null;
-    const guesses = loadGuesses(`cybdatle-bilde-${dateKey}`);
+    const guesses = loadGuesses(imageGuessesKey(dateKey));
     if (guesses.length === 0) return null;
 
     // Index 0 is winning guess, reverse so green square is at the end

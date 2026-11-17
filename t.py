@@ -70,9 +70,17 @@ with open('src/data/characters.json') as f:
         print("Checking for equal users...")
         # ifnoring names, create groups of characters with the rest of the params equal (goal is all charachters unique excluding name)
         # find groups of non-unique characters, print group names + group params
+        # the comparison key derives from the JSON keys (minus name/dateAdded), so column renames need no edits here
+        def char_key(character):
+            return tuple(sorted(
+                (k, tuple(v) if isinstance(v, list) else v)
+                for k, v in character.items()
+                if k not in ('name', 'dateAdded')
+            ))
+
         unique_chars = {}
         for character in characters:
-            key = (character['gender'], tuple(character['role']), character['height'], character['mystisk'], character['verv-whipped'], character['region'])
+            key = char_key(character)
             if key not in unique_chars:
                 unique_chars[key] = []
             unique_chars[key].append(character['name'])

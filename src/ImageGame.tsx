@@ -14,7 +14,7 @@ import {
 } from './charachterPickLogic';
 import SearchBox from './components/SearchBox';
 import WinCard from './components/WinCard';
-import { buildShareText, imageWonKey } from './share';
+import { buildShareText, imageGuessesKey, imageWonKey } from './share';
 
 const ZOOM_STEPS = [7, 5, 3.7, 2.6, 1.9, 1.4, 1];
 
@@ -27,7 +27,7 @@ function ImageGame({ halloween }: { halloween: boolean }) {
   const focusX = seededRandom(`bilde-x-${dateKey}`) * 100;
   const focusY = seededRandom(`bilde-y-${dateKey}`) * 100;
 
-  const [guesses, setGuesses] = useDailyGuesses(`cybdatle-bilde-${dateKey}`);
+  const [guesses, setGuesses] = useDailyGuesses(imageGuessesKey(dateKey));
 
   const hasWon = target !== null && guesses.length > 0 && guesses[0].name === target.name;
 
